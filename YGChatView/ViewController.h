@@ -1,15 +1,31 @@
 //
-//  ViewController.h
-//  YGChatView
+//  YFHistoryVC.h
+//  YF002
 //
-//  Created by 徐永刚 on 9/10/15.
-//  Copyright © 2015 徐永刚. All rights reserved.
+//  Created by Mushroom on 5/31/15.
+//  Copyright (c) 2015 Mushroom. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+
+#import "InfoView.h"
+#import "chatView.h"
+typedef enum{
+    year=0,
+    month,
+    day,
+    week
+}State;
 
 @interface ViewController : UIViewController
 
+@property (nonatomic,weak) UITableView *tableView;
+@property (nonatomic,weak) UIView *aview;
 
+
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+
+
+
+@property (nonatomic,strong) NSMutableArray *recordArray;
+-(void)loadAreaDicWithCGRect:(CGRect) cgrect;
 @end
-
