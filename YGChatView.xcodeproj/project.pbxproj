@@ -79,6 +79,7 @@
 		6231775B1BC8999C00A989B2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6231775A1BC8999C00A989B2 /* CoreGraphics.framework */; };
 		6231775D1BC899A500A989B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6231775C1BC899A500A989B2 /* Foundation.framework */; };
 		6231775F1BC899AF00A989B2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6231775E1BC899AF00A989B2 /* UIKit.framework */; };
+		6276F6F71BFACA4100044A60 /* record.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6276F6F61BFACA4100044A60 /* record.plist */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -230,6 +231,7 @@
 		6231775A1BC8999C00A989B2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6231775C1BC899A500A989B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6231775E1BC899AF00A989B2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6276F6F61BFACA4100044A60 /* record.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = record.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +297,7 @@
 				623176731BC896E800A989B2 /* Info.plist */,
 				623176971BC898D000A989B2 /* library */,
 				623176621BC896E800A989B2 /* Supporting Files */,
+				6276F6F61BFACA4100044A60 /* record.plist */,
 			);
 			path = YGChatView;
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 				6231772A1BC898D100A989B2 /* area.plist in Resources */,
 				623177321BC898D100A989B2 /* MenuCell.xib in Resources */,
 				6231766F1BC896E800A989B2 /* Assets.xcassets in Resources */,
+				6276F6F71BFACA4100044A60 /* record.plist in Resources */,
 				623177261BC898D100A989B2 /* LICENSE in Resources */,
 				6231774C1BC898D100A989B2 /* error@2x.png in Resources */,
 				6231772B1BC898D100A989B2 /* down_dark0.png in Resources */,
@@ -1032,6 +1036,7 @@
 				6231768E1BC896E800A989B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6231768F1BC896E800A989B2 /* Build configuration list for PBXNativeTarget "YGChatViewTests" */ = {
 			isa = XCConfigurationList;
@@ -1040,6 +1045,7 @@
 				623176911BC896E800A989B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		623176921BC896E800A989B2 /* Build configuration list for PBXNativeTarget "YGChatViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -1048,6 +1054,7 @@
 				623176941BC896E800A989B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

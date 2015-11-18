@@ -27,5 +27,5 @@ typedef enum{
 
 
 @property (nonatomic,strong) NSMutableArray *recordArray;
--(void)loadAreaDicWithCGRect:(CGRect) cgrect;
+//-(void)loadAreaDicWithCGRect:(CGRect) cgrect;
 @end

@@ -67,6 +67,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     //   创建滚动视图
     _scrollView.directionalLockEnabled = YES;
     //只能一个方向滑动
@@ -91,9 +93,9 @@
     //读取plist,生成第一级别的dictionary
     NSString *plistPath;
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
-    plistPath = [rootPath stringByAppendingPathComponent:@"treatHistory.plist"];
+    plistPath = [rootPath stringByAppendingPathComponent:@"record.plist"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-        plistPath =  [[NSBundle mainBundle] pathForResource:@"treatHistory" ofType:@"plist"];
+        plistPath =  [[NSBundle mainBundle] pathForResource:@"record" ofType:@"plist"];
     }
     _recordArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
     
@@ -290,7 +292,7 @@
     return [NSString stringWithFormat:@"%d年",[str intValue]+d];
 }
 
-//返回本周的日期范围
+#pragma mark -返回本周的日期范围
 - (NSString* )returnWeekDayWithD:(int)w W:(int)n
 {
     NSDate* date1 = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(n*7-w+1)];
@@ -299,7 +301,7 @@
     [formatter setDateFormat:@"MM-dd"];
     NSString* str1 = [formatter stringFromDate:date1];
     NSString* str2 = [formatter stringFromDate:date2];
-    return [NSString stringWithFormat:@"%@月%@日 - %@月%@日", [[str1 componentsSeparatedByString:@"-"] objectAtIndex:0], [[str1 componentsSeparatedByString:@"-"] objectAtIndex:1], [[str2 componentsSeparatedByString:@"-"] objectAtIndex:0], [[str2 componentsSeparatedByString:@"-"] objectAtIndex:1]];
+    return [NSString stringWithFormat:@"%@月%@日-%@月%@日", [[str1 componentsSeparatedByString:@"-"] objectAtIndex:0], [[str1 componentsSeparatedByString:@"-"] objectAtIndex:1], [[str2 componentsSeparatedByString:@"-"] objectAtIndex:0], [[str2 componentsSeparatedByString:@"-"] objectAtIndex:1]];
 }
 
 int backDaysM(int m){
@@ -366,7 +368,7 @@ int backDaysM(int m){
     return days;
 }
 
-#pragma mark  返回当月的日期范围
+#pragma mark  返回当月的天的范围
 - (NSString* )returnMonthDayWithM:(int)m andDay:(int)d W:(int)w
 {
     int day=backDaysM(m);
@@ -404,7 +406,9 @@ int backDaysM(int m){
             return [self returnCurrentYear:0];
         break;}
 }
-#pragma mark  设置曲线的数量
+
+
+#pragma mark  曲线的数量以及数据点
 - (NSArray* )returnPointXandYWithTip:(int)tip
 {
     
@@ -511,39 +515,13 @@ int backDaysM(int m){
         }
         chat.points = [[self returnPointXandYWithTip:tip] mutableCopy];
         
-        //3.纵轴左边刻度数值
-        // 3.0取出存储的plist历史纪录，按照日期排序；
-        [self leftlabelChatView];
-        //3.1与当前所在的label日期相比较，并且取得segment选取的index，
-        // 3.2符合要求后加入新的数组，累加时间，有药物的话累加药物；
-         
-        for(int i=0; i<5; i++){
-            UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(10, i*50-chat.frame.size.height-5, 30, 20)];
-            [label setText:[NSString stringWithFormat:@"%d", 40-i*10]];
-            [label setTextColor:[UIColor colorWithRed:120.0/255 green:120.0/255 blue:120.0/255 alpha:1.0]];
-            [label setFont:[UIFont systemFontOfSize:11]];
-            [label setTextAlignment:NSTextAlignmentCenter];
-            [label setBackgroundColor:[UIColor clearColor]];
-            [dayView addSubview:label];
-        }
-        //4.如果曲线条数为2，则设置纵轴右边药物刻度数值
-        if (_curveCount == 2) {
-            for(int i=0; i<5; i++){
-                UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake( 290,  i*50-chat.frame.size.height-5, 30, 20)];
-                [label setText:[NSString stringWithFormat:@"%d", 20-i*5]];
-                [label setTextColor:[UIColor blueColor ]];
-                [label setFont:[UIFont systemFontOfSize:11]];
-                [label setTextAlignment:NSTextAlignmentCenter];
-                [label setBackgroundColor:[UIColor clearColor]];
-                [dayView addSubview:label];
-            }
-         }
+       
     }
     NSArray *lastPoint = [chat.points lastObject] ;
     NSLog(@"lastPoint is %@",lastPoint);
 }
-#pragma mark  图表左侧标签以及底部数组的值
--(void)leftlabelChatView{
+#pragma mark  图表左侧标签以及底部数组的值，返回一个数组
+-(void)leftAndRightLabelChatView:{
     //当前选择的日期处理
     NSDate* date = [NSDate date];
     NSDateFormatter* formatter1 = [[NSDateFormatter alloc]init];
@@ -556,59 +534,84 @@ int backDaysM(int m){
     NSDateFormatter* formatter2 = [[NSDateFormatter alloc]init];
     [formatter2 setDateFormat:@"YYYYMMDD"];
     NSDate *selectBeginDate =[formatter2 dateFromString:string3];
-    //历史数据数组
-    NSArray *history= [[NSArray alloc] init];
+    //历史数据数组    ;
     
+    //左边label
     switch ([segmentControl selectedSegmentIndex]) {
-    case (0):{
-        //历史日期处理
-        NSInteger e;
-        for (e=0; e<[history count]; e++) {
-            //当前数组下的字典值
-            NSDictionary *treatItem = [history objectAtIndex:e];
-            NSString *treatDateStr= [treatItem objectForKey:@"treatDate"];
-            NSString *treatDate1 = [treatDateStr substringWithRange:NSMakeRange(0, 8)];
-            NSDate *treatDate = [formatter2 dateFromString:treatDate1];
-             //
-           if ([treatDate laterDate:selectBeginDate] ) {
-                //初始化周的数组值
-               NSMutableArray *weekData =[[NSMutableArray alloc]init];
-               for(NSInteger p=0 ;p<week;p++){
-               [weekData addObject:@"0"];
-               }
-               
-                //计算历史中的值与选择的差距
-                NSInteger timeInterval =(NSInteger)[treatDate timeIntervalSinceDate:selectBeginDate];
-                NSInteger dayDistance = timeInterval/(24*60*60);
-                //如果超出一周则推出
-                if (dayDistance > week-1) {
-                    break;}
-                //取出周对应的数值
-                NSString *dayValue =[weekData objectAtIndex:dayDistance];
-                NSInteger currentValue = [dayValue integerValue];
-                //取出历史字典中treatTime的值
-                NSString *treatTime = [treatItem objectForKey:@"treatTime"];
-                NSInteger treatTimeInt = [treatTime integerValue]*5;
-                //累加出新的数值并更新到周的数组中
-                NSInteger newValue =currentValue +treatTimeInt;
-                NSString *newStr = [NSString stringWithFormat:@"%ld",(long)newValue];
-                [weekData replaceObjectAtIndex:dayDistance withObject:newStr];
+        case (0):{
+            //历史日期处理,遍历数组
+            NSInteger e;
+            for (e=0; e<[_recordArray count]; e++) {
+                //数组下的当前字典值
+                NSDictionary *treatItem = [_recordArray objectAtIndex:e];
+                NSString *treatDateStr= [treatItem objectForKey:@"treatDate"];
+                NSString *treatDate1 = [treatDateStr substringWithRange:NSMakeRange(0, 8)];
+                NSDate *treatDate = [formatter2 dateFromString:treatDate1];
+                //统计出来的数据；
+                NSMutableArray *historyArray = [[NSMutableArray alloc] initWithCapacity:10];
+                
+                if ([treatDate laterDate:selectBeginDate] ) {
+                    //初始化周的数组值
+                    NSMutableArray *weekData =[[NSMutableArray alloc]init];
+                    for(NSInteger p=0 ;p<week;p++){
+                        [weekData addObject:@"0"];
+                    }
+                    
+                    //计算历史中的值与选择的差距
+                    //                NSInteger timeInterval =(NSInteger)[treatDate timeIntervalSinceDate:selectBeginDate];
+                    //
+                    //                //取出周对应的数值
+                    //                NSString *dayValue =[weekData objectAtIndex:dayDistance];
+                    //                NSInteger currentValue = [dayValue integerValue];
+                    //                //取出历史字典中treatTime的值
+                    //                NSString *treatTime = [treatItem objectForKey:@"treatTime"];
+                    //                NSInteger treatTimeInt = [treatTime integerValue]*5;
+                    //                //累加出新的数值并更新到周的数组中
+                    //               // NSInteger newValue =currentValue +treatTimeInt;
+                    //                NSString *newStr = [NSString stringWithFormat:@"%ld",(long)newValue];
+                    //                [weekData replaceObjectAtIndex:dayDistance withObject:newStr];
+                    
+                }
+                //return historyArray;
+                
                 
             }
             
+            break;}
+        case (1):
+        {}
+            break;
+        case (2):
+        {}
             break;
             
+    }
+    
+    //3.1与当前所在的label日期相比较，并且取得segment选取的index，
+    // 3.2符合要求后加入新的数组，累加时间，有药物的话累加药物；
+    
+    for(int i=0; i<5; i++){
+        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(10, i*50-chat.frame.size.height-5, 30, 20)];
+        [label setText:[NSString stringWithFormat:@"%d", 40-i*10]];
+        [label setTextColor:[UIColor colorWithRed:120.0/255 green:120.0/255 blue:120.0/255 alpha:1.0]];
+        [label setFont:[UIFont systemFontOfSize:11]];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [dayView addSubview:label];
+    }
+    //4.右边Label 如果曲线条数为2，则设置纵轴右边药物刻度数值
+    if (_curveCount == 2) {
+        for(int i=0; i<5; i++){
+            UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake( 290,  i*50-chat.frame.size.height-5, 30, 20)];
+            [label setText:[NSString stringWithFormat:@"%d", 20-i*5]];
+            [label setTextColor:[UIColor blueColor ]];
+            [label setFont:[UIFont systemFontOfSize:11]];
+            [label setTextAlignment:NSTextAlignmentCenter];
+            [label setBackgroundColor:[UIColor clearColor]];
+            [dayView addSubview:label];
         }
-        
-        break;}
-    case (1):
-    {}
-        break;
-    case (2):
-    {}
-        break;
-        
-}
+    }
+ 
 }
 //根据tip返回点数
 - (int)rePointCountWithTip:(int)tip
@@ -678,7 +681,7 @@ int backDaysM(int m){
     [self readyDrawLineWithTip:0];
     [dateLab setText:[self returnCurrentTimeStrWithTip:0]];
 }
-//按钮选择对应周月年
+#pragma mark - 按钮选择对应周月年
 - (void)controlPress:(id)sender
 {
     for(id obj in chat.subviews){
@@ -702,7 +705,6 @@ int backDaysM(int m){
             //分段周月年选择 此处选择周
             [self readyDrawLineWithTip:0];
             [dateLab setText:[self returnCurrentTimeStrWithTip:0]];
-            NSLog(@"0");
             break;
         }
         case 1:{
