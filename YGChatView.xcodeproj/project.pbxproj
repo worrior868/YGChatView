@@ -12,85 +12,76 @@
 		6231766A1BC896E800A989B2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176691BC896E800A989B2 /* ViewController.m */; };
 		6231766D1BC896E800A989B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6231766B1BC896E800A989B2 /* Main.storyboard */; };
 		6231766F1BC896E800A989B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6231766E1BC896E800A989B2 /* Assets.xcassets */; };
-		623176721BC896E800A989B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 623176701BC896E800A989B2 /* LaunchScreen.storyboard */; };
 		6231767D1BC896E800A989B2 /* YGChatViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231767C1BC896E800A989B2 /* YGChatViewTests.m */; };
-		623176881BC896E800A989B2 /* YGChatViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176871BC896E800A989B2 /* YGChatViewUITests.m */; };
-		6231771B1BC898D100A989B2 /* AKPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231769A1BC898D000A989B2 /* AKPickerView.m */; settings = {ASSET_TAGS = (); }; };
-		6231771C1BC898D100A989B2 /* BabyBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231769D1BC898D000A989B2 /* BabyBluetooth.m */; settings = {ASSET_TAGS = (); }; };
-		6231771D1BC898D100A989B2 /* BabyCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231769F1BC898D000A989B2 /* BabyCallback.m */; settings = {ASSET_TAGS = (); }; };
-		6231771E1BC898D100A989B2 /* BabyOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A11BC898D000A989B2 /* BabyOptions.m */; settings = {ASSET_TAGS = (); }; };
-		6231771F1BC898D100A989B2 /* BabyRhythm.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A31BC898D000A989B2 /* BabyRhythm.m */; settings = {ASSET_TAGS = (); }; };
-		623177201BC898D100A989B2 /* Babysister.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A51BC898D000A989B2 /* Babysister.m */; settings = {ASSET_TAGS = (); }; };
-		623177211BC898D100A989B2 /* BabySpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A71BC898D000A989B2 /* BabySpeaker.m */; settings = {ASSET_TAGS = (); }; };
-		623177221BC898D100A989B2 /* BabyToy.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A91BC898D000A989B2 /* BabyToy.m */; settings = {ASSET_TAGS = (); }; };
-		623177231BC898D100A989B2 /* BlurryModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176AC1BC898D000A989B2 /* BlurryModalSegue.m */; settings = {ASSET_TAGS = (); }; };
-		623177241BC898D100A989B2 /* MZAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176AF1BC898D100A989B2 /* MZAppearance.m */; settings = {ASSET_TAGS = (); }; };
-		623177251BC898D100A989B2 /* NSInvocation+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176B11BC898D100A989B2 /* NSInvocation+Copy.m */; settings = {ASSET_TAGS = (); }; };
-		623177261BC898D100A989B2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 623176B31BC898D100A989B2 /* LICENSE */; settings = {ASSET_TAGS = (); }; };
-		623177271BC898D100A989B2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 623176B41BC898D100A989B2 /* README.md */; settings = {ASSET_TAGS = (); }; };
-		623177281BC898D100A989B2 /* UIImage+BlurredFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176B61BC898D100A989B2 /* UIImage+BlurredFrame.m */; settings = {ASSET_TAGS = (); }; };
-		623177291BC898D100A989B2 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176B81BC898D100A989B2 /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
-		6231772A1BC898D100A989B2 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623176BB1BC898D100A989B2 /* area.plist */; settings = {ASSET_TAGS = (); }; };
-		6231772B1BC898D100A989B2 /* down_dark0.png in Resources */ = {isa = PBXBuildFile; fileRef = 623176BC1BC898D100A989B2 /* down_dark0.png */; settings = {ASSET_TAGS = (); }; };
-		6231772C1BC898D100A989B2 /* screentshoot1.png in Resources */ = {isa = PBXBuildFile; fileRef = 623176BD1BC898D100A989B2 /* screentshoot1.png */; settings = {ASSET_TAGS = (); }; };
-		6231772D1BC898D100A989B2 /* screentshoot2.png in Resources */ = {isa = PBXBuildFile; fileRef = 623176BE1BC898D100A989B2 /* screentshoot2.png */; settings = {ASSET_TAGS = (); }; };
-		6231772E1BC898D100A989B2 /* LMComBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176C11BC898D100A989B2 /* LMComBoxView.m */; settings = {ASSET_TAGS = (); }; };
-		6231772F1BC898D100A989B2 /* LMContainsLMComboxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176C31BC898D100A989B2 /* LMContainsLMComboxScrollView.m */; settings = {ASSET_TAGS = (); }; };
-		623177301BC898D100A989B2 /* JKSideSlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176C61BC898D100A989B2 /* JKSideSlipView.m */; settings = {ASSET_TAGS = (); }; };
-		623177311BC898D100A989B2 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176C81BC898D100A989B2 /* MenuCell.m */; settings = {ASSET_TAGS = (); }; };
-		623177321BC898D100A989B2 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 623176C91BC898D100A989B2 /* MenuCell.xib */; settings = {ASSET_TAGS = (); }; };
-		623177331BC898D100A989B2 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176CB1BC898D100A989B2 /* MenuView.m */; settings = {ASSET_TAGS = (); }; };
-		623177341BC898D100A989B2 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 623176CC1BC898D100A989B2 /* MenuView.xib */; settings = {ASSET_TAGS = (); }; };
-		623177351BC898D100A989B2 /* LVModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176CF1BC898D100A989B2 /* LVModel.m */; settings = {ASSET_TAGS = (); }; };
-		623177361BC898D100A989B2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623176D11BC898D100A989B2 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		623177371BC898D100A989B2 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176D31BC898D100A989B2 /* MASCompositeConstraint.m */; settings = {ASSET_TAGS = (); }; };
-		623177381BC898D100A989B2 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176D61BC898D100A989B2 /* MASConstraint.m */; settings = {ASSET_TAGS = (); }; };
-		623177391BC898D100A989B2 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176D81BC898D100A989B2 /* MASConstraintMaker.m */; settings = {ASSET_TAGS = (); }; };
-		6231773A1BC898D100A989B2 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176DA1BC898D100A989B2 /* MASLayoutConstraint.m */; settings = {ASSET_TAGS = (); }; };
-		6231773B1BC898D100A989B2 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176DE1BC898D100A989B2 /* MASViewAttribute.m */; settings = {ASSET_TAGS = (); }; };
-		6231773C1BC898D100A989B2 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176E01BC898D100A989B2 /* MASViewConstraint.m */; settings = {ASSET_TAGS = (); }; };
-		6231773D1BC898D100A989B2 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176E21BC898D100A989B2 /* NSArray+MASAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		6231773E1BC898D100A989B2 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176E51BC898D100A989B2 /* NSLayoutConstraint+MASDebugAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		6231773F1BC898D100A989B2 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176E71BC898D100A989B2 /* View+MASAdditions.m */; settings = {ASSET_TAGS = (); }; };
-		623177401BC898D100A989B2 /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176EB1BC898D100A989B2 /* MHTextField.m */; settings = {ASSET_TAGS = (); }; };
-		623177411BC898D100A989B2 /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176EE1BC898D100A989B2 /* MMMaterialDesignSpinner.m */; settings = {ASSET_TAGS = (); }; };
-		623177421BC898D100A989B2 /* MYBlurIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176F11BC898D100A989B2 /* MYBlurIntroductionView.m */; settings = {ASSET_TAGS = (); }; };
-		623177431BC898D100A989B2 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176F31BC898D100A989B2 /* MYIntroductionPanel.m */; settings = {ASSET_TAGS = (); }; };
-		623177441BC898D100A989B2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623176F51BC898D100A989B2 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		623177451BC898D100A989B2 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176F71BC898D100A989B2 /* MZTimerLabel.m */; settings = {ASSET_TAGS = (); }; };
-		623177461BC898D100A989B2 /* SliderSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176FA1BC898D100A989B2 /* SliderSwitch.m */; settings = {ASSET_TAGS = (); }; };
-		623177471BC898D100A989B2 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 623176FC1BC898D100A989B2 /* .gitkeep */; settings = {ASSET_TAGS = (); }; };
-		623177481BC898D100A989B2 /* STAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176FE1BC898D100A989B2 /* STAlertView.m */; settings = {ASSET_TAGS = (); }; };
-		623177491BC898D100A989B2 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177011BC898D100A989B2 /* SVIndefiniteAnimatedView.m */; settings = {ASSET_TAGS = (); }; };
-		6231774A1BC898D100A989B2 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 623177021BC898D100A989B2 /* SVProgressHUD.bundle */; settings = {ASSET_TAGS = (); }; };
-		6231774B1BC898D100A989B2 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177041BC898D100A989B2 /* SVProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
-		6231774C1BC898D100A989B2 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 623177061BC898D100A989B2 /* error@2x.png */; settings = {ASSET_TAGS = (); }; };
-		6231774D1BC898D100A989B2 /* TextFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177081BC898D100A989B2 /* TextFieldValidator.m */; settings = {ASSET_TAGS = (); }; };
-		6231774E1BC898D100A989B2 /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231770B1BC898D100A989B2 /* NSDate+convenience.m */; settings = {ASSET_TAGS = (); }; };
-		6231774F1BC898D100A989B2 /* NSMutableArray+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231770D1BC898D100A989B2 /* NSMutableArray+convenience.m */; settings = {ASSET_TAGS = (); }; };
-		623177501BC898D100A989B2 /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231770F1BC898D100A989B2 /* UIColor+expanded.m */; settings = {ASSET_TAGS = (); }; };
-		623177511BC898D100A989B2 /* UIView+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177111BC898D100A989B2 /* UIView+convenience.m */; settings = {ASSET_TAGS = (); }; };
-		623177521BC898D100A989B2 /* VRGCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177131BC898D100A989B2 /* VRGCalendarView.m */; settings = {ASSET_TAGS = (); }; };
-		623177531BC898D100A989B2 /* chatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177161BC898D100A989B2 /* chatView.m */; settings = {ASSET_TAGS = (); }; };
-		623177541BC898D100A989B2 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177181BC898D100A989B2 /* InfoView.m */; settings = {ASSET_TAGS = (); }; };
-		623177551BC898D100A989B2 /* UIKit+DrawingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231771A1BC898D100A989B2 /* UIKit+DrawingHelpers.m */; settings = {ASSET_TAGS = (); }; };
+		6231771B1BC898D100A989B2 /* AKPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231769A1BC898D000A989B2 /* AKPickerView.m */; };
+		6231771C1BC898D100A989B2 /* BabyBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231769D1BC898D000A989B2 /* BabyBluetooth.m */; };
+		6231771D1BC898D100A989B2 /* BabyCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231769F1BC898D000A989B2 /* BabyCallback.m */; };
+		6231771E1BC898D100A989B2 /* BabyOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A11BC898D000A989B2 /* BabyOptions.m */; };
+		6231771F1BC898D100A989B2 /* BabyRhythm.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A31BC898D000A989B2 /* BabyRhythm.m */; };
+		623177201BC898D100A989B2 /* Babysister.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A51BC898D000A989B2 /* Babysister.m */; };
+		623177211BC898D100A989B2 /* BabySpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A71BC898D000A989B2 /* BabySpeaker.m */; };
+		623177221BC898D100A989B2 /* BabyToy.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176A91BC898D000A989B2 /* BabyToy.m */; };
+		623177231BC898D100A989B2 /* BlurryModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176AC1BC898D000A989B2 /* BlurryModalSegue.m */; };
+		623177241BC898D100A989B2 /* MZAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176AF1BC898D100A989B2 /* MZAppearance.m */; };
+		623177251BC898D100A989B2 /* NSInvocation+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176B11BC898D100A989B2 /* NSInvocation+Copy.m */; };
+		623177261BC898D100A989B2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 623176B31BC898D100A989B2 /* LICENSE */; };
+		623177271BC898D100A989B2 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 623176B41BC898D100A989B2 /* README.md */; };
+		623177281BC898D100A989B2 /* UIImage+BlurredFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176B61BC898D100A989B2 /* UIImage+BlurredFrame.m */; };
+		623177291BC898D100A989B2 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176B81BC898D100A989B2 /* UIImage+ImageEffects.m */; };
+		6231772A1BC898D100A989B2 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623176BB1BC898D100A989B2 /* area.plist */; };
+		6231772B1BC898D100A989B2 /* down_dark0.png in Resources */ = {isa = PBXBuildFile; fileRef = 623176BC1BC898D100A989B2 /* down_dark0.png */; };
+		6231772C1BC898D100A989B2 /* screentshoot1.png in Resources */ = {isa = PBXBuildFile; fileRef = 623176BD1BC898D100A989B2 /* screentshoot1.png */; };
+		6231772D1BC898D100A989B2 /* screentshoot2.png in Resources */ = {isa = PBXBuildFile; fileRef = 623176BE1BC898D100A989B2 /* screentshoot2.png */; };
+		6231772E1BC898D100A989B2 /* LMComBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176C11BC898D100A989B2 /* LMComBoxView.m */; };
+		6231772F1BC898D100A989B2 /* LMContainsLMComboxScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176C31BC898D100A989B2 /* LMContainsLMComboxScrollView.m */; };
+		623177301BC898D100A989B2 /* JKSideSlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176C61BC898D100A989B2 /* JKSideSlipView.m */; };
+		623177311BC898D100A989B2 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176C81BC898D100A989B2 /* MenuCell.m */; };
+		623177321BC898D100A989B2 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 623176C91BC898D100A989B2 /* MenuCell.xib */; };
+		623177331BC898D100A989B2 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176CB1BC898D100A989B2 /* MenuView.m */; };
+		623177341BC898D100A989B2 /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 623176CC1BC898D100A989B2 /* MenuView.xib */; };
+		623177351BC898D100A989B2 /* LVModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176CF1BC898D100A989B2 /* LVModel.m */; };
+		623177361BC898D100A989B2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623176D11BC898D100A989B2 /* Info.plist */; };
+		623177371BC898D100A989B2 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176D31BC898D100A989B2 /* MASCompositeConstraint.m */; };
+		623177381BC898D100A989B2 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176D61BC898D100A989B2 /* MASConstraint.m */; };
+		623177391BC898D100A989B2 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176D81BC898D100A989B2 /* MASConstraintMaker.m */; };
+		6231773A1BC898D100A989B2 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176DA1BC898D100A989B2 /* MASLayoutConstraint.m */; };
+		6231773B1BC898D100A989B2 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176DE1BC898D100A989B2 /* MASViewAttribute.m */; };
+		6231773C1BC898D100A989B2 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176E01BC898D100A989B2 /* MASViewConstraint.m */; };
+		6231773D1BC898D100A989B2 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176E21BC898D100A989B2 /* NSArray+MASAdditions.m */; };
+		6231773E1BC898D100A989B2 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176E51BC898D100A989B2 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		6231773F1BC898D100A989B2 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176E71BC898D100A989B2 /* View+MASAdditions.m */; };
+		623177401BC898D100A989B2 /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176EB1BC898D100A989B2 /* MHTextField.m */; };
+		623177411BC898D100A989B2 /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176EE1BC898D100A989B2 /* MMMaterialDesignSpinner.m */; };
+		623177421BC898D100A989B2 /* MYBlurIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176F11BC898D100A989B2 /* MYBlurIntroductionView.m */; };
+		623177431BC898D100A989B2 /* MYIntroductionPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176F31BC898D100A989B2 /* MYIntroductionPanel.m */; };
+		623177441BC898D100A989B2 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 623176F51BC898D100A989B2 /* Info.plist */; };
+		623177451BC898D100A989B2 /* MZTimerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176F71BC898D100A989B2 /* MZTimerLabel.m */; };
+		623177461BC898D100A989B2 /* SliderSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176FA1BC898D100A989B2 /* SliderSwitch.m */; };
+		623177471BC898D100A989B2 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 623176FC1BC898D100A989B2 /* .gitkeep */; };
+		623177481BC898D100A989B2 /* STAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623176FE1BC898D100A989B2 /* STAlertView.m */; };
+		623177491BC898D100A989B2 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177011BC898D100A989B2 /* SVIndefiniteAnimatedView.m */; };
+		6231774A1BC898D100A989B2 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 623177021BC898D100A989B2 /* SVProgressHUD.bundle */; };
+		6231774B1BC898D100A989B2 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177041BC898D100A989B2 /* SVProgressHUD.m */; };
+		6231774C1BC898D100A989B2 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 623177061BC898D100A989B2 /* error@2x.png */; };
+		6231774D1BC898D100A989B2 /* TextFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177081BC898D100A989B2 /* TextFieldValidator.m */; };
+		6231774E1BC898D100A989B2 /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231770B1BC898D100A989B2 /* NSDate+convenience.m */; };
+		6231774F1BC898D100A989B2 /* NSMutableArray+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231770D1BC898D100A989B2 /* NSMutableArray+convenience.m */; };
+		623177501BC898D100A989B2 /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231770F1BC898D100A989B2 /* UIColor+expanded.m */; };
+		623177511BC898D100A989B2 /* UIView+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177111BC898D100A989B2 /* UIView+convenience.m */; };
+		623177521BC898D100A989B2 /* VRGCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177131BC898D100A989B2 /* VRGCalendarView.m */; };
+		623177531BC898D100A989B2 /* chatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177161BC898D100A989B2 /* chatView.m */; };
+		623177541BC898D100A989B2 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 623177181BC898D100A989B2 /* InfoView.m */; };
+		623177551BC898D100A989B2 /* UIKit+DrawingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6231771A1BC898D100A989B2 /* UIKit+DrawingHelpers.m */; };
 		623177571BC8998900A989B2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623177561BC8998900A989B2 /* QuartzCore.framework */; };
 		623177591BC8999300A989B2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623177581BC8999300A989B2 /* MessageUI.framework */; };
 		6231775B1BC8999C00A989B2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6231775A1BC8999C00A989B2 /* CoreGraphics.framework */; };
 		6231775D1BC899A500A989B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6231775C1BC899A500A989B2 /* Foundation.framework */; };
 		6231775F1BC899AF00A989B2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6231775E1BC899AF00A989B2 /* UIKit.framework */; };
-		6276F6F71BFACA4100044A60 /* record.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6276F6F61BFACA4100044A60 /* record.plist */; settings = {ASSET_TAGS = (); }; };
+		6276F6F71BFACA4100044A60 /* record.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6276F6F61BFACA4100044A60 /* record.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		623176791BC896E800A989B2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 623176571BC896E800A989B2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6231765E1BC896E800A989B2;
-			remoteInfo = YGChatView;
-		};
-		623176841BC896E800A989B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 623176571BC896E800A989B2 /* Project object */;
 			proxyType = 1;
@@ -108,12 +99,10 @@
 		623176691BC896E800A989B2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6231766C1BC896E800A989B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6231766E1BC896E800A989B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		623176711BC896E800A989B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		623176731BC896E800A989B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623176781BC896E800A989B2 /* YGChatViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YGChatViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6231767C1BC896E800A989B2 /* YGChatViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YGChatViewTests.m; sourceTree = "<group>"; };
 		6231767E1BC896E800A989B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		623176831BC896E800A989B2 /* YGChatViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YGChatViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		623176871BC896E800A989B2 /* YGChatViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YGChatViewUITests.m; sourceTree = "<group>"; };
 		623176891BC896E800A989B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		623176991BC898D000A989B2 /* AKPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKPickerView.h; sourceTree = "<group>"; };
@@ -254,13 +243,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		623176801BC896E800A989B2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -279,7 +261,6 @@
 			children = (
 				6231765F1BC896E800A989B2 /* YGChatView.app */,
 				623176781BC896E800A989B2 /* YGChatViewTests.xctest */,
-				623176831BC896E800A989B2 /* YGChatViewUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,7 +274,6 @@
 				623176691BC896E800A989B2 /* ViewController.m */,
 				6231766B1BC896E800A989B2 /* Main.storyboard */,
 				6231766E1BC896E800A989B2 /* Assets.xcassets */,
-				623176701BC896E800A989B2 /* LaunchScreen.storyboard */,
 				623176731BC896E800A989B2 /* Info.plist */,
 				623176971BC898D000A989B2 /* library */,
 				623176621BC896E800A989B2 /* Supporting Files */,
@@ -656,24 +636,6 @@
 			productReference = 623176781BC896E800A989B2 /* YGChatViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		623176821BC896E800A989B2 /* YGChatViewUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 623176921BC896E800A989B2 /* Build configuration list for PBXNativeTarget "YGChatViewUITests" */;
-			buildPhases = (
-				6231767F1BC896E800A989B2 /* Sources */,
-				623176801BC896E800A989B2 /* Frameworks */,
-				623176811BC896E800A989B2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				623176851BC896E800A989B2 /* PBXTargetDependency */,
-			);
-			name = YGChatViewUITests;
-			productName = YGChatViewUITests;
-			productReference = 623176831BC896E800A989B2 /* YGChatViewUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -685,12 +647,9 @@
 				TargetAttributes = {
 					6231765E1BC896E800A989B2 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 62G84Z3MVG;
 					};
 					623176771BC896E800A989B2 = {
-						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 6231765E1BC896E800A989B2;
-					};
-					623176821BC896E800A989B2 = {
 						CreatedOnToolsVersion = 7.0;
 						TestTargetID = 6231765E1BC896E800A989B2;
 					};
@@ -711,7 +670,6 @@
 			targets = (
 				6231765E1BC896E800A989B2 /* YGChatView */,
 				623176771BC896E800A989B2 /* YGChatViewTests */,
-				623176821BC896E800A989B2 /* YGChatViewUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -722,7 +680,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6231772C1BC898D100A989B2 /* screentshoot1.png in Resources */,
-				623176721BC896E800A989B2 /* LaunchScreen.storyboard in Resources */,
 				6231772A1BC898D100A989B2 /* area.plist in Resources */,
 				623177321BC898D100A989B2 /* MenuCell.xib in Resources */,
 				6231766F1BC896E800A989B2 /* Assets.xcassets in Resources */,
@@ -741,13 +698,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		623176761BC896E800A989B2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		623176811BC896E800A989B2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -822,14 +772,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6231767F1BC896E800A989B2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				623176881BC896E800A989B2 /* YGChatViewUITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -837,11 +779,6 @@
 			isa = PBXTargetDependency;
 			target = 6231765E1BC896E800A989B2 /* YGChatView */;
 			targetProxy = 623176791BC896E800A989B2 /* PBXContainerItemProxy */;
-		};
-		623176851BC896E800A989B2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6231765E1BC896E800A989B2 /* YGChatView */;
-			targetProxy = 623176841BC896E800A989B2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -852,14 +789,6 @@
 				6231766C1BC896E800A989B2 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		623176701BC896E800A989B2 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				623176711BC896E800A989B2 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -951,10 +880,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = YGChatView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xC.YGChatView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -962,10 +894,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = YGChatView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = xC.YGChatView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -990,30 +925,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = xC.YGChatViewTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YGChatView.app/YGChatView";
-			};
-			name = Release;
-		};
-		623176931BC896E800A989B2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = YGChatViewUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = xC.YGChatViewUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = YGChatView;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		623176941BC896E800A989B2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = YGChatViewUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = xC.YGChatViewUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = YGChatView;
-				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
@@ -1043,15 +954,6 @@
 			buildConfigurations = (
 				623176901BC896E800A989B2 /* Debug */,
 				623176911BC896E800A989B2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		623176921BC896E800A989B2 /* Build configuration list for PBXNativeTarget "YGChatViewUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				623176931BC896E800A989B2 /* Debug */,
-				623176941BC896E800A989B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

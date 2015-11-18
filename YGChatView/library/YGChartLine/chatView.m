@@ -18,9 +18,9 @@
         self.lines = [[NSMutableArray alloc]init];
         
         //第一条曲线的颜色
-        self.afColor = [UIColor whiteColor];
+        self.afColor = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.8];
         //第二条曲线的颜色
-        self.bfColor = [UIColor blueColor];
+        self.bfColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.7];
         self.points = [[NSMutableArray alloc]init];
     }
     return self;

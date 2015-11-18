@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F6800953-9FF7-47BB-BE30-7B4C0FA1851B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>YGChatView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C71E939ADDC79819CE04521D97E143269A5343D8</key>
+		<string>https://github.com/worrior868/YGChatView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>YGChatView.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C71E939ADDC79819CE04521D97E143269A5343D8</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/worrior868/YGChatView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C71E939ADDC79819CE04521D97E143269A5343D8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C71E939ADDC79819CE04521D97E143269A5343D8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>YGChatView</string>
+		</dict>
+	</array>
+</dict>
+</plist>

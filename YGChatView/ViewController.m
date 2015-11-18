@@ -24,15 +24,7 @@
 @interface ViewController ()  <UIScrollViewDelegate,AKPickerViewDataSource, AKPickerViewDelegate>
 {
     
-    NSMutableDictionary *addressDict;   //地址选择字典
-    NSMutableDictionary *areaDic;
-    NSArray *province;
-    NSArray *city;
-    NSArray *district;
     
-    NSString *selectedProvince;
-    NSString *selectedCity;
-    NSString *selectedArea;
     
     UISegmentedControl *segmentControl;
     chatView *chat;
@@ -60,6 +52,8 @@
 //图表的左右两侧数据
 @property (nonatomic,assign) NSInteger leftMaxValue;
 @property (nonatomic,assign) NSInteger rightMaxValue;
+
+@property (nonatomic, strong) NSString *treatDrugHistory;
 
 @end
 
@@ -371,6 +365,17 @@ int backDaysM(int m){
 #pragma mark  返回当月的天的范围
 - (NSString* )returnMonthDayWithM:(int)m andDay:(int)d W:(int)w
 {
+    NSArray *dateArray = [self returnMonthBeginAndEndDateWithM:m andDay:d W:w];
+    NSDate *date1 = [dateArray objectAtIndex:0];
+    NSDate *date2 = [dateArray objectAtIndex:1];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM-dd"];
+    NSString* str1 = [formatter stringFromDate:date1];
+    NSString* str2 = [formatter stringFromDate:date2];
+    return [NSString stringWithFormat:@"%@月%@日 - %@月%@日", [[str1 componentsSeparatedByString:@"-"] objectAtIndex:0], [[str1 componentsSeparatedByString:@"-"] objectAtIndex:1], [[str2 componentsSeparatedByString:@"-"] objectAtIndex:0], [[str2 componentsSeparatedByString:@"-"] objectAtIndex:1]];
+}
+//用于上一个方法
+- (NSArray *) returnMonthBeginAndEndDateWithM:(int)m andDay:(int)d W:(int)w{
     int day=backDaysM(m);
     int days=0;
     int days2=0;
@@ -381,15 +386,11 @@ int backDaysM(int m){
         days = [self backDaysWithM:m andW:w];
         days2 = [self backaDaysWithM:m andW:w];
     }
-    
-    NSLog(@"%d-%d", days, days2);
+     NSLog(@"%d-%d", days, days2);
     NSDate* date1 = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(days-d+1)];
     NSDate* date2 = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(days2+day-d)];
-    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"MM-dd"];
-    NSString* str1 = [formatter stringFromDate:date1];
-    NSString* str2 = [formatter stringFromDate:date2];
-    return [NSString stringWithFormat:@"%@月%@日 - %@月%@日", [[str1 componentsSeparatedByString:@"-"] objectAtIndex:0], [[str1 componentsSeparatedByString:@"-"] objectAtIndex:1], [[str2 componentsSeparatedByString:@"-"] objectAtIndex:0], [[str2 componentsSeparatedByString:@"-"] objectAtIndex:1]];
+    NSArray *mothBeginAndEndDate = [NSArray arrayWithObjects:date1,date2, nil];
+    return mothBeginAndEndDate;
 }
 
 #pragma mark  根据周月年返回dateView日期的值
@@ -411,93 +412,89 @@ int backDaysM(int m){
 #pragma mark  - 曲线的数量／数据点／左右label
 - (NSArray* )returnPointXandYWithTip:(int)tip
 {
+    //创建第一条线的点
+    NSMutableArray *aPoints = [[NSMutableArray alloc]init];
+    //根据划分几个网格来设置点数据
+    //int gap = chat.frame.size.width/([self rePointCountWithTip:tip]-2);
+    int gap = chat.frame.size.width/([self rePointCountWithTip:tip]-2);
+    if(([self rePointCountWithTip:tip]-2)*gap>=250){
+        gap-=2;
+    }
+    NSArray *treatTimeHistroyArr= [self leftLabelChatView];
+    //寻找数组中的最大值
+    NSNumber *maxTreatTimeNum = [treatTimeHistroyArr valueForKeyPath:@"@max.integerValue"];
+    // NSLog(@"maxTreatTime %@",maxTreatTimeNum);
+    NSInteger maxTreatTimeInt = [maxTreatTimeNum integerValue];
     
+    
+    for(int i=0; i<[self rePointCountWithTip:tip]-1; i++){
+        //把历史数据转化成点
+        CGFloat treatTimeFlo = (CGFloat)[[treatTimeHistroyArr objectAtIndex:i] integerValue];
+        CGFloat pointY;
+        
+        if (treatTimeFlo == 0) {
+            pointY = 205;
+        } else {
+            pointY= 205*(1-treatTimeFlo/maxTreatTimeInt)+3;
+        }
+        NSLog(@"CGFloat PointY is %f",pointY);
+        CGPoint point1 =CGPointMake(1+gap*i, pointY);
+        
+        //产生随机数的方式
+        //CGPoint point1 =CGPointMake(1+gap*i, arc4random()%180);
+        [aPoints addObject:[NSValue valueWithCGPoint:point1]];
+    }
+    
+    //如果有药物数据，创建第一条线的点
     if (_curveCount == 2) {
-        //创建第一条线的点
-        NSMutableArray *aPoints = [[NSMutableArray alloc]init];
         //创建第二条线的点
         NSMutableArray *bPoints = [[NSMutableArray alloc] init];
-        //根据划分几个网格来设置点数据
-        //int gap = chat.frame.size.width/([self rePointCountWithTip:tip]-2);
-        int gap = chat.frame.size.width/([self rePointCountWithTip:tip]-2);
-        if(([self rePointCountWithTip:tip]-2)*gap>=250){
-            gap-=2;
-        }
+        NSArray *treatDrugHistroyArr= [self rightLabelChatView];
+        //寻找数组中的最大值
+        NSNumber *maxTreatDrugNum = [treatDrugHistroyArr valueForKeyPath:@"@max.integerValue"];
+        // NSLog(@"maxTreatTime %@",maxTreatTimeNum);
+        NSInteger maxTreatDrugInt = [maxTreatDrugNum integerValue];
+
         for(int i=0; i<[self rePointCountWithTip:tip]-1; i++){
-            //随机产生画曲线所需的点
-            CGPoint point1 =CGPointMake(1+gap*i, arc4random()%180);
-            [aPoints addObject:[NSValue valueWithCGPoint:point1]];
-            CGPoint point2 =CGPointMake(1+gap*i, arc4random()%180+20);
+          //产生治疗药物数量曲线所需的点
+            CGFloat treatDrugFlo = (CGFloat)[[treatDrugHistroyArr objectAtIndex:i] integerValue];
+            CGFloat bpointY;
+            
+            if (treatDrugFlo == 0) {
+                bpointY = 205;
+            } else {
+                bpointY= 205*(1-treatDrugFlo/maxTreatDrugInt)+3;
+            }
+            CGPoint point2 =CGPointMake(1+gap*i, bpointY);
             [bPoints addObject:[NSValue valueWithCGPoint:point2]];
         }
-        return [NSArray arrayWithObjects:aPoints,bPoints, nil];
+        return [NSArray arrayWithObjects:bPoints,aPoints, nil];
     } else {
-        //创建第一条线的点
-        NSMutableArray *aPoints = [[NSMutableArray alloc]init];
-        
-        //根据划分几个网格来设置点数据
-        //int gap = chat.frame.size.width/([self rePointCountWithTip:tip]-2);
-        int gap = chat.frame.size.width/([self rePointCountWithTip:tip]-2);
-        if(([self rePointCountWithTip:tip]-2)*gap>=250){
-            gap-=2;
-        }
-        for(int i=0; i<[self rePointCountWithTip:tip]-1; i++){
-            //产生画曲线所需的点
-            NSArray *histroyDataArr= [self leftAndRightLabelChatViewWithYear:0 andMouth:0 andDay:0];
-            CGFloat pointY = (CGFloat)[[histroyDataArr objectAtIndex:i] integerValue];
-            NSLog(@"CGFloat PointY is %f",pointY);
-            CGPoint point1 =CGPointMake(1+gap*i, arc4random()%180);
-            [aPoints addObject:[NSValue valueWithCGPoint:point1]];
-
-        }
-        return [NSArray arrayWithObjects:aPoints, nil];
+       return [NSArray arrayWithObjects:aPoints, nil];
     }
-   
-    
-    
-}
+ }
 
 
 #pragma mark  图表左侧标签以及底部数组的值，返回一个数组
--(NSArray *)leftAndRightLabelChatViewWithYear:(int)y andMouth:(int)m andDay:(int)d {
+-(NSArray *)leftLabelChatView {
     NSMutableArray *historyArray = [[NSMutableArray alloc] initWithCapacity:7];
-
+    //统计出来的数据；
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMdd"];
     
-    for(int i=0; i<5; i++){
-        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(10, i*50-chat.frame.size.height-5, 30, 20)];
-        [label setText:[NSString stringWithFormat:@"%d", 40-i*10]];
-        [label setTextColor:[UIColor colorWithRed:120.0/255 green:120.0/255 blue:120.0/255 alpha:1.0]];
-        [label setFont:[UIFont systemFontOfSize:11]];
-        [label setTextAlignment:NSTextAlignmentCenter];
-        [label setBackgroundColor:[UIColor clearColor]];
-        [dayView addSubview:label];
-    }
-    //4.右边Label 如果曲线条数为2，则设置纵轴右边药物刻度数值
-    if (_curveCount == 2) {
-        for(int i=0; i<5; i++){
-            UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake( 290,  i*50-chat.frame.size.height-5, 30, 20)];
-            [label setText:[NSString stringWithFormat:@"%d", 20-i*5]];
-            [label setTextColor:[UIColor blueColor ]];
-            [label setFont:[UIFont systemFontOfSize:11]];
-            [label setTextAlignment:NSTextAlignmentCenter];
-            [label setBackgroundColor:[UIColor clearColor]];
-            [dayView addSubview:label];
-        }
-    }
     //左边label
     switch ([segmentControl selectedSegmentIndex]) {
         case 0:{
-            //统计出来的数据；
-            NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-            [formatter setDateFormat:@"yyyyMMdd"];
-            //当前日期范围
-            NSDate* beginDate = [NSDate dateWithTimeIntervalSinceNow:60*60*24*([self getCurrentTimeWith:week]*7-goW+1)];
-            
+            //当前周日期范围
+            NSDate* beginDate = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(goW*7-[self getCurrentTimeWith:week]+1)];
+            //NSString *beginDateStr = [formatter stringFromDate:beginDate];
+            // NSLog(@"current beginDay %d , %@",[self getCurrentTimeWith:week],beginDateStr);
             //初始化周的数组值
-            for(NSInteger p=0 ;p<week;p++){
+            for(NSInteger p=0 ;p<7;p++){
                 [historyArray addObject:@"0"];
             }
-            
+            //NSLog(@"current beginDay %@",historyArray);
+
             NSInteger e;
             for (e=0; e<[_recordArray count]; e++) {
                 //数组下的当前字典值
@@ -505,9 +502,9 @@ int backDaysM(int m){
                 NSString *treatDateStr= [treatItem objectForKey:@"treatDate"];
                 NSString *treatDate1 = [treatDateStr substringWithRange:NSMakeRange(0, 8)];
                 NSDate *treatDate = [formatter dateFromString:treatDate1];
-                NSLog(@"treatDate is %@",treatDate);
+               // NSLog(@"treatDate is %@",treatDate);
                 NSInteger dayDistance =[self getDaysFrom:beginDate To:treatDate];
-                if (0 <= dayDistance   ) {
+                if ( (0 <= dayDistance) && (dayDistance <= 6)  ) {
                    //取出周对应的数值
                       NSString *dayValue =[historyArray objectAtIndex:dayDistance];
                       NSInteger currentValue = [dayValue integerValue];
@@ -518,21 +515,158 @@ int backDaysM(int m){
                       NSInteger newValue =currentValue +treatTimeInt;
                       NSString *newStr = [NSString stringWithFormat:@"%ld",(long)newValue];
                       [historyArray replaceObjectAtIndex:dayDistance withObject:newStr];
-                    
-                }
+                    NSLog(@"historyArray %@",historyArray);
+                 }
               }
+             break;
+           }
+        case 1:{
+            //当前月 日期范围
+            NSArray *monthBeginAndEndDate = [self returnMonthBeginAndEndDateWithM:[self getCurrentTimeWith:month] andDay:[self getCurrentTimeWith:day] W:goM];
+            NSDate *beginDate = [monthBeginAndEndDate objectAtIndex:0];
+            NSDate *endDate = [monthBeginAndEndDate objectAtIndex:1];
+            //初始化月的数组值
+            for(NSInteger p=0 ;p<32;p++){
+                [historyArray addObject:@"0"];
+            }
+            NSInteger e;
+            for (e=0; e<[_recordArray count]; e++) {
+                //数组下的当前字典值
+                NSDictionary *treatItem = [_recordArray objectAtIndex:e];
+                NSString *treatDateStr= [treatItem objectForKey:@"treatDate"];
+                NSString *treatDate1 = [treatDateStr substringWithRange:NSMakeRange(0, 8)];
+                NSDate *treatDate = [formatter dateFromString:treatDate1];
+                // NSLog(@"treatDate is %@",treatDate);
+                NSInteger dayDistanceFromBegin =[self getDaysFrom:beginDate To:treatDate];
+                NSInteger dayDistanceToEnd = [self getDaysFrom:endDate To:treatDate];
+                if ( (0 <= dayDistanceFromBegin) && (dayDistanceToEnd <= 0)  ) {
+                    //取出周对应的数值
+                    NSString *dayValue =[historyArray objectAtIndex:dayDistanceFromBegin];
+                    NSInteger currentValue = [dayValue integerValue];
+                    //取出历史字典中treatTime的值
+                    NSString *treatTimeStr = [treatItem objectForKey:@"treatTime"];
+                    NSInteger treatTimeInt = [treatTimeStr integerValue]*5;
+                    //累加出新的数值并更新到周的数组中
+                    NSInteger newValue =currentValue +treatTimeInt;
+                    NSString *newStr = [NSString stringWithFormat:@"%ld",(long)newValue];
+                    [historyArray replaceObjectAtIndex:dayDistanceFromBegin withObject:newStr];
+                    NSLog(@"historyArray %@",historyArray);
+                }
+            }
+            for (NSInteger f= 0; f<8; f++) {
+                //取四个值相加为一个值；
+                NSInteger treatTimeDay1 = [[historyArray objectAtIndex:4*f+0] integerValue];
+                NSInteger treatTimeDay2 = [[historyArray objectAtIndex:4*f+1] integerValue];
+                NSInteger treatTimeDay3 = [[historyArray objectAtIndex:4*f+2] integerValue];
+                NSInteger treatTimeDay4 = [[historyArray objectAtIndex:4*f+3] integerValue];
+                NSInteger newInt = treatTimeDay1 + treatTimeDay2+ treatTimeDay3+ treatTimeDay4;
+                NSString *newStr = [NSString stringWithFormat:@"%ld",newInt];
+                [historyArray replaceObjectAtIndex:f withObject:newStr];
+             }
+            break;
+        }
+        case 2:{
+            
             
             break;
-          
-            
-    }
+        }
+
     }
     
-    //3.1与当前所在的label日期相比较，并且取得segment选取的index，
-    // 3.2符合要求后加入新的数组，累加时间，有药物的话累加药物；
+
+    //寻找左边label数组中的最大值
+    NSNumber *maxTreatTimeNum=[historyArray valueForKeyPath:@"@max.integerValue"];
+    NSInteger maxTreatTimeInt = [maxTreatTimeNum integerValue];
+    
+    for(int i=0; i<5; i++){
+        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(10, i*50-chat.frame.size.height-5, 35, 20)];
+        if (maxTreatTimeInt == 0) {
+            [label setText:[NSString stringWithFormat:@"%d", 60-i*15]];
+        }else{
+        [label setText:[NSString stringWithFormat:@"%ld", maxTreatTimeInt*(4-i)/4]];
+        NSLog(@"maxTreatTimeLabel %@",label.text);
+         }
+       [label setTextColor:[UIColor colorWithRed:120.0/255 green:120.0/255 blue:120.0/255 alpha:1.0]];
+        [label setFont:[UIFont systemFontOfSize:11]];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [dayView addSubview:label];
+    }
+
+ 
     
     return historyArray;
     
+}
+
+-(NSArray *)rightLabelChatView{
+    NSMutableArray *historyArray = [[NSMutableArray alloc] initWithCapacity:7];
+    //统计出来的数据；
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMdd"];
+    //4.右边Label 如果曲线条数为2，则设置纵轴右边药物刻度数值
+    
+        switch ([segmentControl selectedSegmentIndex]) {
+            case 0:
+            {  //当前周日期范围
+                NSDate* beginDate = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(goW*7-[self getCurrentTimeWith:week]+1)];
+                //NSString *beginDateStr = [formatter stringFromDate:beginDate];
+                // NSLog(@"current beginDay %d , %@",[self getCurrentTimeWith:week],beginDateStr);
+                //初始化周的数组值
+                for(NSInteger p=0 ;p<7;p++){
+                    [historyArray addObject:@"0"];
+                }
+                //NSLog(@"current beginDay %@",historyArray);
+                
+                NSInteger e;
+                for (e=0; e<[_recordArray count]; e++) {
+                    //数组下的当前字典值
+                    NSDictionary *treatItem = [_recordArray objectAtIndex:e];
+                    NSString *treatDateStr= [treatItem objectForKey:@"treatDate"];
+                    NSString *treatDate1 = [treatDateStr substringWithRange:NSMakeRange(0, 8)];
+                    NSDate *treatDate = [formatter dateFromString:treatDate1];
+                    // NSLog(@"treatDate is %@",treatDate);
+                    NSString *treatDrugStr = [treatItem objectForKey:@"treatDrug"];
+                    NSInteger dayDistance =[self getDaysFrom:beginDate To:treatDate];
+                    if ( (0 <= dayDistance) && (dayDistance <= 6) && [treatDrugStr isEqual:_treatDrugHistory] ) {
+                        //取出周对应的数值
+                        NSString *dayValue =[historyArray objectAtIndex:dayDistance];
+                        NSInteger currentValue = [dayValue integerValue];
+                        //取出历史字典中treatDrug的值
+                        NSString *treatTimeStr = [treatItem objectForKey:@"treatDrugNumber"];
+                        NSInteger treatTimeInt = [treatTimeStr integerValue];
+                        //累加出新的数值并更新到周的数组中
+                        NSInteger newValue = currentValue + treatTimeInt;
+                        NSString *newStr = [NSString stringWithFormat:@"%ld",(long)newValue];
+                        [historyArray replaceObjectAtIndex:dayDistance withObject:newStr];
+                        NSLog(@"historyArray %@",historyArray);
+                    }
+                }
+                break;
+            }
+            case 1:
+            {
+                break;
+            }
+            case 2:
+            {
+                break;
+            }
+        }
+        
+        
+        for(int i=0; i<5; i++){
+            UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake( 290,  i*50-chat.frame.size.height-5, 30, 20)];
+            [label setText:[NSString stringWithFormat:@"%d", 20-i*5]];
+            [label setTextColor:[UIColor blueColor ]];
+            [label setFont:[UIFont systemFontOfSize:11]];
+            [label setTextAlignment:NSTextAlignmentCenter];
+            [label setBackgroundColor:[UIColor clearColor]];
+            [dayView addSubview:label];
+        }
+    
+    return historyArray;
+
 }
 
 #pragma mark  比较两个NSDate时间差
@@ -837,6 +971,7 @@ int backDaysM(int m){
     } else {
         _curveCount = 2;
          [self controlPress:nil];
+        _treatDrugHistory =  self.titles[item];
     }
     [self controlPress:nil];
     
