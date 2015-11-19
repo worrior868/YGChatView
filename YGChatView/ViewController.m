@@ -461,9 +461,9 @@ int backDaysM(int m){
             CGFloat bpointY;
             
             if (treatDrugFlo == 0) {
-                bpointY = 205;
+                bpointY = 206;
             } else {
-                bpointY= 205*(1-treatDrugFlo/maxTreatDrugInt)+3;
+                bpointY= 204*(1-treatDrugFlo/maxTreatDrugInt)+2;
             }
             CGPoint point2 =CGPointMake(1+gap*i, bpointY);
             [bPoints addObject:[NSValue valueWithCGPoint:point2]];
@@ -607,10 +607,28 @@ int backDaysM(int m){
             break;
         }
         case 2:{
-            NSString *yearDateStr = [self returnCurrentYear:goY];
-            NSDate *yearDateBegin = [formatter dateFromString:yearDateStr];
+            
+            NSString *yearDateStr1 = [[self returnCurrentYear:goY] substringWithRange:NSMakeRange(0, 4)];
+            NSString *yearDateStr2 = [yearDateStr1 stringByAppendingString:@"0101"];
+            
+            NSDate *yearDateBegin = [formatter dateFromString:yearDateStr2];
+             NSLog(@"yearDateBegin is %@",yearDateBegin);
+
+            
             //初始化年的数组值
-            for(NSInteger p=0 ;p<366;p++){
+            NSCalendar *calender = [NSCalendar currentCalendar];
+            NSDateComponents *comps =[calender components:(NSCalendarUnitYear | NSCalendarUnitMonth |NSCalendarUnitDay | NSCalendarUnitWeekday)fromDate:yearDateBegin];
+            int countDayOfYear = 0;
+            for (int i=1; i<=12; i++) {
+                [comps setMonth:i];
+                NSRange range = [calender rangeOfUnit:NSCalendarUnitDay
+                                 inUnit: NSCalendarUnitMonth
+                                 forDate: [calender dateFromComponents:comps]];
+                countDayOfYear += range.length;
+              }
+            
+            NSLog(@"%d", countDayOfYear);
+            for(NSInteger p=0 ;p<countDayOfYear;p++){
                 [historyArray addObject:@"0"];
                 [historyDrugArray addObject:@"0"];
             }
@@ -628,7 +646,7 @@ int backDaysM(int m){
 
                 
                 NSInteger distanceDay = [self getDaysFrom:yearDateBegin To:treatDate];
-                if (  (0 <= distanceDay) && (distanceDay <= 366)   ) {
+                if (  (0 <= distanceDay) && (distanceDay <= countDayOfYear)   ) {
                     if ([treatDrugStr isEqual:_treatDrugHistory]) {
                         //取出周对应的数值
                         NSString *dayDrugValue =[historyDrugArray objectAtIndex:distanceDay];
@@ -660,8 +678,11 @@ int backDaysM(int m){
                 NSInteger treatTimeDays = 0;
                 NSInteger treatDrugDays = 0;
                 for (NSInteger g=0; g<48; g++) {
-                treatTimeDays += [[historyArray objectAtIndex:48*f+g] integerValue];
-                treatDrugDays += [[historyDrugArray objectAtIndex:48*f+g] integerValue];
+                    if ((48*f+g) < countDayOfYear) {
+                        treatTimeDays += [[historyArray objectAtIndex:48*f+g] integerValue];
+                        treatDrugDays += [[historyDrugArray objectAtIndex:48*f+g] integerValue];
+                    }
+                
                 }
                 
                NSString *newtreatTimeStr = [NSString stringWithFormat:@"%ld",treatTimeDays];
@@ -670,8 +691,6 @@ int backDaysM(int m){
                 NSString *newtreatDrugStr = [NSString stringWithFormat:@"%ld",treatDrugDays];
                 [historyDrugArray replaceObjectAtIndex:f withObject:newtreatDrugStr];
             }
-            [historyArray removeObjectsInRange:NSMakeRange(7, [historyArray count])];
-            [historyDrugArray removeObjectsInRange:NSMakeRange(7, [historyDrugArray count])];
             break;
         }
 
@@ -697,24 +716,25 @@ int backDaysM(int m){
     }
     
     //寻找右边label数组中的最大值
+    if (_curveCount == 2) {
     NSNumber *maxTreatDrugNum=[historyDrugArray valueForKeyPath:@"@max.integerValue"];
     NSInteger maxTreatDrugInt = [maxTreatDrugNum integerValue];
-    for(int i=0; i<5; i++){
-        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake( 290,  i*50-chat.frame.size.height-5, 30, 20)];
+    for(int i=0; i<3; i++){
+        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake( 290,  i*100-chat.frame.size.height-5, 30, 20)];
         if (maxTreatDrugInt == 0) {
-            [label setText:[NSString stringWithFormat:@"%d", 60-i*15]];
+            [label setText:[NSString stringWithFormat:@"%d", 10*(2-i)/2]];
 
         }else{
-            [label setText:[NSString stringWithFormat:@"%ld", maxTreatDrugInt*(4-i)/4]];
+            [label setText:[NSString stringWithFormat:@"%ld", maxTreatDrugInt*(2-i)/2]];
         }
-        [label setText:[NSString stringWithFormat:@"%d", 20-i*5]];
+        
         [label setTextColor:[UIColor blueColor ]];
         [label setFont:[UIFont systemFontOfSize:11]];
         [label setTextAlignment:NSTextAlignmentCenter];
         [label setBackgroundColor:[UIColor clearColor]];
         [dayView addSubview:label];
+      }
     }
-    
     NSArray *array = [NSArray arrayWithObjects:historyArray,historyDrugArray, nil];
     return array;
     
@@ -785,7 +805,7 @@ int backDaysM(int m){
                 [lab setText:[self reWeeksWithDay:i UseTip:tip]];
                 [lab setBackgroundColor:[UIColor clearColor]];
                 //图表底部横坐标刻度颜色
-                [lab setTextColor:[UIColor grayColor]];
+                [lab setTextColor:selfDefineColor1];
                 [lab setFont:[UIFont systemFontOfSize:11]];
                 [dayView addSubview:lab];
             }else{
@@ -812,16 +832,16 @@ int backDaysM(int m){
 {
     switch (tip) {
         case 0:{return 8;break;}
-        case 1:{return 9;break;}
-        default:{return 8;break;}
+        case 1:{return 8;break;}
+        default:{return 7;break;}
     }
 }
 //根据tip返回线的条数
 - (int)reLineCountWithTip:(int)tip{
     switch (tip) {
         case 0:{return 8;break;}
-        case 1:{return 9;break;}
-        default:{return 8;break;}
+        case 1:{return 8;break;}
+        default:{return 7;break;}
     }
 }
 
@@ -838,21 +858,20 @@ int backDaysM(int m){
             default:return @"星期日";break;}
     }else if(tip==1){
         switch (day) {
-            case 0:{return @"1日";break;}
-            case 1:{return @"4日";break;}
-            case 2:{return @"8日";break;}
-            case 3:{return @"12日";break;}
-            case 4:{return @"16日";break;}
-            case 5:{return @"20日";break;}
-            case 6:{return @"24日";break;}
+            case 0:{return @"4日";break;}
+            case 1:{return @"8日";break;}
+            case 2:{return @"12日";break;}
+            case 3:{return @"16日";break;}
+            case 4:{return @"20日";break;}
+            case 5:{return @"24日";break;}
             default:return @"28日";break;}
     }else{
-        switch (day) {case 0:{return @"1月";break;}
-            case 1:{return @"2月";break;}
-            case 2:{return @"4月";break;}
-            case 3:{return @"6月";break;}
-            case 4:{return @"8月";break;}
-            case 5:{return @"10月";break;}
+        switch (day) {
+            case 0:{return @"2月";break;}
+            case 1:{return @"4月";break;}
+            case 2:{return @"6月";break;}
+            case 3:{return @"8月";break;}
+            case 4:{return @"10月";break;}
             default:return @"12月";break;}
     }
 }

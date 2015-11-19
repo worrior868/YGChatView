@@ -17,10 +17,10 @@
         // Initialization code
         self.lines = [[NSMutableArray alloc]init];
         
-        //第一条曲线的颜色
-        self.afColor = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.8];
-        //第二条曲线的颜色
-        self.bfColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.7];
+        //治疗时间 treatTime曲线的颜色
+        self.afColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        //药物曲线 treatDrug的颜色
+        self.bfColor = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0];
         self.points = [[NSMutableArray alloc]init];
     }
     return self;
