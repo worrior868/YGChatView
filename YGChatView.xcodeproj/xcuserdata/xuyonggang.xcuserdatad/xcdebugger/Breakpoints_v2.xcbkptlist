@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "463"
             endingLineNumber = "463"
-            landmarkName = "-leftAndRightLabelChatViewWithYear:andMouth:andDay:"
+            landmarkName = "-returnPointXandYWithTip:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YGChatView/ViewController.m"
-            timestampString = "469527107.326715"
+            timestampString = "469608637.976784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
-            landmarkName = "-leftAndRightLabelChatViewWithYear:andMouth:andDay:"
+            startingLineNumber = "623"
+            endingLineNumber = "623"
+            landmarkName = "-leftAndRightLabelChatView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YGChatView/ViewController.m"
-            timestampString = "469527128.233955"
+            timestampString = "469608785.42639"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "510"
-            endingLineNumber = "510"
-            landmarkName = "-leftAndRightLabelChatViewWithYear:andMouth:andDay:"
+            startingLineNumber = "638"
+            endingLineNumber = "638"
+            landmarkName = "-leftAndRightLabelChatView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

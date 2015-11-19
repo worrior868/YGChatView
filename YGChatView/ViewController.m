@@ -420,7 +420,7 @@ int backDaysM(int m){
     if(([self rePointCountWithTip:tip]-2)*gap>=250){
         gap-=2;
     }
-    NSArray *treatTimeHistroyArr= [self leftLabelChatView];
+    NSArray *treatTimeHistroyArr= [[self leftAndRightLabelChatView] objectAtIndex:0];
     //寻找数组中的最大值
     NSNumber *maxTreatTimeNum = [treatTimeHistroyArr valueForKeyPath:@"@max.integerValue"];
     // NSLog(@"maxTreatTime %@",maxTreatTimeNum);
@@ -449,7 +449,7 @@ int backDaysM(int m){
     if (_curveCount == 2) {
         //创建第二条线的点
         NSMutableArray *bPoints = [[NSMutableArray alloc] init];
-        NSArray *treatDrugHistroyArr= [self rightLabelChatView];
+        NSArray *treatDrugHistroyArr= [[self leftAndRightLabelChatView] objectAtIndex:1];
         //寻找数组中的最大值
         NSNumber *maxTreatDrugNum = [treatDrugHistroyArr valueForKeyPath:@"@max.integerValue"];
         // NSLog(@"maxTreatTime %@",maxTreatTimeNum);
@@ -476,8 +476,9 @@ int backDaysM(int m){
 
 
 #pragma mark  图表左侧标签以及底部数组的值，返回一个数组
--(NSArray *)leftLabelChatView {
+-(NSArray *)leftAndRightLabelChatView {
     NSMutableArray *historyArray = [[NSMutableArray alloc] initWithCapacity:7];
+    NSMutableArray *historyDrugArray = [[NSMutableArray alloc] initWithCapacity:7];
     //统计出来的数据；
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyyMMdd"];
@@ -492,6 +493,7 @@ int backDaysM(int m){
             //初始化周的数组值
             for(NSInteger p=0 ;p<7;p++){
                 [historyArray addObject:@"0"];
+                [historyDrugArray addObject:@"0"];
             }
             //NSLog(@"current beginDay %@",historyArray);
 
@@ -503,8 +505,23 @@ int backDaysM(int m){
                 NSString *treatDate1 = [treatDateStr substringWithRange:NSMakeRange(0, 8)];
                 NSDate *treatDate = [formatter dateFromString:treatDate1];
                // NSLog(@"treatDate is %@",treatDate);
+                NSString *treatDrugStr = [treatItem objectForKey:@"treatDrug"];
+                
                 NSInteger dayDistance =[self getDaysFrom:beginDate To:treatDate];
                 if ( (0 <= dayDistance) && (dayDistance <= 6)  ) {
+                    if ([treatDrugStr isEqual:_treatDrugHistory]) {
+                         //取出周对应的数值
+                            NSString *dayDrugValue =[historyDrugArray objectAtIndex:dayDistance];
+                            NSInteger currentDrugValue = [dayDrugValue integerValue];
+                            //取出历史字典中treatDrug的值
+                            NSString *treatDrugStr = [treatItem objectForKey:@"treatDrugNumber"];
+                            NSInteger treatDrugInt = [treatDrugStr integerValue];
+                            //累加出新的数值并更新到周的数组中
+                            NSInteger newDrugValue = currentDrugValue + treatDrugInt;
+                            NSString *newDrugStr = [NSString stringWithFormat:@"%ld",(long)newDrugValue];
+                            [historyDrugArray replaceObjectAtIndex:dayDistance withObject:newDrugStr];
+                            NSLog(@"historyArray %@",historyDrugArray);
+                    }
                    //取出周对应的数值
                       NSString *dayValue =[historyArray objectAtIndex:dayDistance];
                       NSInteger currentValue = [dayValue integerValue];
@@ -528,6 +545,7 @@ int backDaysM(int m){
             //初始化月的数组值
             for(NSInteger p=0 ;p<32;p++){
                 [historyArray addObject:@"0"];
+                [historyDrugArray addObject:@"0"];
             }
             NSInteger e;
             for (e=0; e<[_recordArray count]; e++) {
@@ -537,9 +555,25 @@ int backDaysM(int m){
                 NSString *treatDate1 = [treatDateStr substringWithRange:NSMakeRange(0, 8)];
                 NSDate *treatDate = [formatter dateFromString:treatDate1];
                 // NSLog(@"treatDate is %@",treatDate);
+                NSString *treatDrugStr = [treatItem objectForKey:@"treatDrug"];
+
                 NSInteger dayDistanceFromBegin =[self getDaysFrom:beginDate To:treatDate];
                 NSInteger dayDistanceToEnd = [self getDaysFrom:endDate To:treatDate];
                 if ( (0 <= dayDistanceFromBegin) && (dayDistanceToEnd <= 0)  ) {
+                    if ([treatDrugStr isEqual:_treatDrugHistory]) {
+                            //取出周对应的数值
+                            NSString *dayDrugValue =[historyDrugArray objectAtIndex:dayDistanceFromBegin];
+                            NSInteger currentDrugValue = [dayDrugValue integerValue];
+                            //取出历史字典中treatDrug的值
+                            NSString *treatDrugStr = [treatItem objectForKey:@"treatDrugNumber"];
+                            NSInteger treatDrugInt = [treatDrugStr integerValue];
+                            //累加出新的数值并更新到周的数组中
+                            NSInteger newDrugValue = currentDrugValue + treatDrugInt;
+                            NSString *newDrugStr = [NSString stringWithFormat:@"%ld",(long)newDrugValue];
+                            [historyDrugArray replaceObjectAtIndex:dayDistanceFromBegin withObject:newDrugStr];
+                           // NSLog(@"historyArray %@",historyDrugArray);
+                        }
+                    
                     //取出周对应的数值
                     NSString *dayValue =[historyArray objectAtIndex:dayDistanceFromBegin];
                     NSInteger currentValue = [dayValue integerValue];
@@ -550,24 +584,94 @@ int backDaysM(int m){
                     NSInteger newValue =currentValue +treatTimeInt;
                     NSString *newStr = [NSString stringWithFormat:@"%ld",(long)newValue];
                     [historyArray replaceObjectAtIndex:dayDistanceFromBegin withObject:newStr];
-                    NSLog(@"historyArray %@",historyArray);
+                    // NSLog(@"historyArray %@",historyArray);
                 }
             }
+            //取四个值相加为一个值；
             for (NSInteger f= 0; f<8; f++) {
-                //取四个值相加为一个值；
-                NSInteger treatTimeDay1 = [[historyArray objectAtIndex:4*f+0] integerValue];
-                NSInteger treatTimeDay2 = [[historyArray objectAtIndex:4*f+1] integerValue];
-                NSInteger treatTimeDay3 = [[historyArray objectAtIndex:4*f+2] integerValue];
-                NSInteger treatTimeDay4 = [[historyArray objectAtIndex:4*f+3] integerValue];
-                NSInteger newInt = treatTimeDay1 + treatTimeDay2+ treatTimeDay3+ treatTimeDay4;
-                NSString *newStr = [NSString stringWithFormat:@"%ld",newInt];
-                [historyArray replaceObjectAtIndex:f withObject:newStr];
-             }
+                
+                NSInteger treatTimeDay=0;
+                NSInteger treatDrugDay=0;
+
+                for (NSInteger g=0; g<4; g++) {
+                    treatTimeDay += [[historyArray objectAtIndex:4*f+g] integerValue];
+                    treatDrugDay += [[historyDrugArray objectAtIndex:4*f+g] integerValue];
+                }
+                 NSString *newtreatTimeStr = [NSString stringWithFormat:@"%ld",treatTimeDay];
+                [historyArray replaceObjectAtIndex:f withObject:newtreatTimeStr];
+                
+                NSString *newtreatDrugStr = [NSString stringWithFormat:@"%ld",treatDrugDay];
+                [historyDrugArray replaceObjectAtIndex:f withObject:newtreatDrugStr];
+                
+            }
             break;
         }
         case 2:{
-            
-            
+            NSString *yearDateStr = [self returnCurrentYear:goY];
+            NSDate *yearDateBegin = [formatter dateFromString:yearDateStr];
+            //初始化年的数组值
+            for(NSInteger p=0 ;p<366;p++){
+                [historyArray addObject:@"0"];
+                [historyDrugArray addObject:@"0"];
+            }
+
+            NSInteger e;
+            for (e=0; e<[_recordArray count]; e++) {
+                //数组下的当前字典值
+                NSDictionary *treatItem = [_recordArray objectAtIndex:e];
+                NSString *treatDateStr1= [treatItem objectForKey:@"treatDate"];
+                NSString *treatDateStr2 = [treatDateStr1 substringWithRange:NSMakeRange(0, 8)];
+                NSDate *treatDate = [formatter dateFromString:treatDateStr2];
+                
+                // NSLog(@"treatDate is %@",treatDate);
+                NSString *treatDrugStr = [treatItem objectForKey:@"treatDrug"];
+
+                
+                NSInteger distanceDay = [self getDaysFrom:yearDateBegin To:treatDate];
+                if (  (0 <= distanceDay) && (distanceDay <= 366)   ) {
+                    if ([treatDrugStr isEqual:_treatDrugHistory]) {
+                        //取出周对应的数值
+                        NSString *dayDrugValue =[historyDrugArray objectAtIndex:distanceDay];
+                        NSInteger currentDrugValue = [dayDrugValue integerValue];
+                        //取出历史字典中treatDrug的值
+                        NSString *treatDrugStr = [treatItem objectForKey:@"treatDrugNumber"];
+                        NSInteger treatDrugInt = [treatDrugStr integerValue];
+                        //累加出新的数值并更新到周的数组中
+                        NSInteger newDrugValue = currentDrugValue + treatDrugInt;
+                        NSString *newDrugStr = [NSString stringWithFormat:@"%ld",(long)newDrugValue];
+                        [historyDrugArray replaceObjectAtIndex:distanceDay withObject:newDrugStr];
+                        // NSLog(@"historyArray %@",historyDrugArray);
+                    }
+                    //取出周对应的数值
+                    NSString *dayValue =[historyArray objectAtIndex:distanceDay];
+                    NSInteger currentValue = [dayValue integerValue];
+                    //取出历史字典中treatTime的值
+                    NSString *treatTimeStr = [treatItem objectForKey:@"treatTime"];
+                    NSInteger treatTimeInt = [treatTimeStr integerValue]*5;
+                    //累加出新的数值并更新到周的数组中
+                    NSInteger newValue =currentValue +treatTimeInt;
+                    NSString *newStr = [NSString stringWithFormat:@"%ld",(long)newValue];
+                    [historyArray replaceObjectAtIndex:distanceDay withObject:newStr];
+                    // NSLog(@"historyArray %@",historyArray);
+                }
+            }
+            for (NSInteger f= 0; f<7; f++) {
+                //取四个值相加为一个值；
+                NSInteger treatTimeDays = 0;
+                NSInteger treatDrugDays = 0;
+                for (NSInteger g=0; g<48; g++) {
+                treatTimeDays += [[historyArray objectAtIndex:48*f+g] integerValue];
+                treatDrugDays += [[historyDrugArray objectAtIndex:48*f+g] integerValue];
+                }
+                
+               NSString *newtreatTimeStr = [NSString stringWithFormat:@"%ld",treatTimeDays];
+                [historyArray replaceObjectAtIndex:f withObject:newtreatTimeStr];
+                
+                NSString *newtreatDrugStr = [NSString stringWithFormat:@"%ld",treatDrugDays];
+                [historyDrugArray replaceObjectAtIndex:f withObject:newtreatDrugStr];
+            }
+            [historyArray removeObjectsInRange:NSMakeRange(7, [historyArray count])];
+            [historyDrugArray removeObjectsInRange:NSMakeRange(7, [historyDrugArray count])];
             break;
         }
 
@@ -577,7 +681,6 @@ int backDaysM(int m){
     //寻找左边label数组中的最大值
     NSNumber *maxTreatTimeNum=[historyArray valueForKeyPath:@"@max.integerValue"];
     NSInteger maxTreatTimeInt = [maxTreatTimeNum integerValue];
-    
     for(int i=0; i<5; i++){
         UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(10, i*50-chat.frame.size.height-5, 35, 20)];
         if (maxTreatTimeInt == 0) {
@@ -592,82 +695,32 @@ int backDaysM(int m){
         [label setBackgroundColor:[UIColor clearColor]];
         [dayView addSubview:label];
     }
-
- 
     
-    return historyArray;
+    //寻找右边label数组中的最大值
+    NSNumber *maxTreatDrugNum=[historyDrugArray valueForKeyPath:@"@max.integerValue"];
+    NSInteger maxTreatDrugInt = [maxTreatDrugNum integerValue];
+    for(int i=0; i<5; i++){
+        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake( 290,  i*50-chat.frame.size.height-5, 30, 20)];
+        if (maxTreatDrugInt == 0) {
+            [label setText:[NSString stringWithFormat:@"%d", 60-i*15]];
+
+        }else{
+            [label setText:[NSString stringWithFormat:@"%ld", maxTreatDrugInt*(4-i)/4]];
+        }
+        [label setText:[NSString stringWithFormat:@"%d", 20-i*5]];
+        [label setTextColor:[UIColor blueColor ]];
+        [label setFont:[UIFont systemFontOfSize:11]];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [dayView addSubview:label];
+    }
+    
+    NSArray *array = [NSArray arrayWithObjects:historyArray,historyDrugArray, nil];
+    return array;
     
 }
 
--(NSArray *)rightLabelChatView{
-    NSMutableArray *historyArray = [[NSMutableArray alloc] initWithCapacity:7];
-    //统计出来的数据；
-    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyyMMdd"];
-    //4.右边Label 如果曲线条数为2，则设置纵轴右边药物刻度数值
-    
-        switch ([segmentControl selectedSegmentIndex]) {
-            case 0:
-            {  //当前周日期范围
-                NSDate* beginDate = [NSDate dateWithTimeIntervalSinceNow:60*60*24*(goW*7-[self getCurrentTimeWith:week]+1)];
-                //NSString *beginDateStr = [formatter stringFromDate:beginDate];
-                // NSLog(@"current beginDay %d , %@",[self getCurrentTimeWith:week],beginDateStr);
-                //初始化周的数组值
-                for(NSInteger p=0 ;p<7;p++){
-                    [historyArray addObject:@"0"];
-                }
-                //NSLog(@"current beginDay %@",historyArray);
-                
-                NSInteger e;
-                for (e=0; e<[_recordArray count]; e++) {
-                    //数组下的当前字典值
-                    NSDictionary *treatItem = [_recordArray objectAtIndex:e];
-                    NSString *treatDateStr= [treatItem objectForKey:@"treatDate"];
-                    NSString *treatDate1 = [treatDateStr substringWithRange:NSMakeRange(0, 8)];
-                    NSDate *treatDate = [formatter dateFromString:treatDate1];
-                    // NSLog(@"treatDate is %@",treatDate);
-                    NSString *treatDrugStr = [treatItem objectForKey:@"treatDrug"];
-                    NSInteger dayDistance =[self getDaysFrom:beginDate To:treatDate];
-                    if ( (0 <= dayDistance) && (dayDistance <= 6) && [treatDrugStr isEqual:_treatDrugHistory] ) {
-                        //取出周对应的数值
-                        NSString *dayValue =[historyArray objectAtIndex:dayDistance];
-                        NSInteger currentValue = [dayValue integerValue];
-                        //取出历史字典中treatDrug的值
-                        NSString *treatTimeStr = [treatItem objectForKey:@"treatDrugNumber"];
-                        NSInteger treatTimeInt = [treatTimeStr integerValue];
-                        //累加出新的数值并更新到周的数组中
-                        NSInteger newValue = currentValue + treatTimeInt;
-                        NSString *newStr = [NSString stringWithFormat:@"%ld",(long)newValue];
-                        [historyArray replaceObjectAtIndex:dayDistance withObject:newStr];
-                        NSLog(@"historyArray %@",historyArray);
-                    }
-                }
-                break;
-            }
-            case 1:
-            {
-                break;
-            }
-            case 2:
-            {
-                break;
-            }
-        }
-        
-        
-        for(int i=0; i<5; i++){
-            UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake( 290,  i*50-chat.frame.size.height-5, 30, 20)];
-            [label setText:[NSString stringWithFormat:@"%d", 20-i*5]];
-            [label setTextColor:[UIColor blueColor ]];
-            [label setFont:[UIFont systemFontOfSize:11]];
-            [label setTextAlignment:NSTextAlignmentCenter];
-            [label setBackgroundColor:[UIColor clearColor]];
-            [dayView addSubview:label];
-        }
-    
-    return historyArray;
 
-}
 
 #pragma mark  比较两个NSDate时间差
 -(NSInteger)getDaysFrom:(NSDate *)serverDate To:(NSDate *)endDate
@@ -680,8 +733,8 @@ int backDaysM(int m){
     //去掉时分秒信息
     NSDate *fromDate;
     NSDate *toDate;
-    [gregorian rangeOfUnit:NSCalendarUnitDay startDate:&fromDate interval:NULL forDate:serverDate];
-    [gregorian rangeOfUnit:NSCalendarUnitDay startDate:&toDate interval:NULL forDate:endDate];
+    [gregorian rangeOfUnit:NSCalendarUnitDay startDate:&fromDate interval:nil forDate:serverDate];
+    [gregorian rangeOfUnit:NSCalendarUnitDay startDate:&toDate interval:nil forDate:endDate];
     NSDateComponents *dayComponents = [gregorian components:NSCalendarUnitDay fromDate:fromDate toDate:toDate options:0];
     
     return dayComponents.day;
